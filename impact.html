@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Impact Stories - Education Drive</title>
+   <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+   <section class="container mt-5">
+      <h2 class="text-center">Impact Stories</h2>
+      <div id="impact-stories">
+         <!-- Stories loaded here via JavaScript -->
+      </div>
+   </section>
+
+   <script>
+      fetch("php/get_impact_stories.php")
+         .then(response => response.json())
+         .then(data => {
+            const storiesDiv = document.getElementById("impact-stories");
+            data.forEach(story => {
+               const storyElement = document.createElement("div");
+               storyElement.innerHTML = `
+                  <h3>${story.title}</h3>
+                  <p>${story.content}</p>
+                  <p><small>Date: ${story.date}</small></p>
+               `;
+               storiesDiv.appendChild(storyElement);
+            });
+         });
+   </script>
+</body>
+</html>

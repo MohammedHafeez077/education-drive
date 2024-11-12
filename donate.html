@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Donate - Education Drive</title>
+   <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+   <section class="container text-center mt-5">
+      <h2>Support Our Cause</h2>
+      <p>Total Donations: $<span id="total-donations">0.00</span></p>
+
+      <form action="php/add_donation.php" method="POST">
+         <input type="text" name="donor_name" placeholder="Your Name" required>
+         <input type="number" name="amount" placeholder="Donation Amount" step="0.01" required>
+         <button type="submit" class="btn btn-success">Donate</button>
+      </form>
+   </section>
+
+   <script>
+      fetch("php/get_donations.php")
+         .then((response) => response.json())
+         .then((data) => {
+            document.getElementById("total-donations").textContent = data.total;
+         });
+   </script>
+</body>
+</html>
